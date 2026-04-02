@@ -1,4 +1,4 @@
-import { Plugin } from "@opencode-ai/plugin";
+import type { Plugin } from "@opencode-ai/plugin";
 import { join } from "node:path";
 import { homedir } from "node:os";
 
@@ -12,36 +12,33 @@ export const NotifyPlugin: Plugin = async ({ $ }) => {
       let body = "";
 
       switch (event.type) {
-        case "session.idle":
+        case "session.idle": {
           title = "OpenCode: Turn complete";
           body = "Check terminal for results";
           break;
+        }
 
-        case "session.updated":
-          title = "OpenCode: Turn complete";
-          body = "Check terminal for results";
-          break;
-
-
-        case "permission.asked":
+        case "permission.asked": {
           title = "OpenCode: Approval needed";
           body = "Action requires your permission";
           break;
-
-        case "session.error":
+        }
+        case "session.error": {
+          // @ts-ignore - event.properties.error may not exist but we handle it
           title = "OpenCode: Error";
-          body = event.message || "An error occurred";
+          body = (event as any).properties?.error?.message || "An error occurred";
           break;
-
+        }
         default:
           return; // Ignore other events
       }
 
       try {
         // Bun's $ shell API handles the execution
-        await $`${NOTIFY_PUSH} ${title} ${body}`;
+        await $`${NOTIFY_PUSH} "${title}" "${body}"`;
       } catch (err) {
         // Fail silently if the script is missing or errors out
+        console.error("Notification failed:", err);
       }
     },
   };
