@@ -17,6 +17,12 @@ export const NotifyPlugin: Plugin = async ({ $ }) => {
           body = "Check terminal for results";
           break;
 
+        case "session.updated":
+          title = "OpenCode: Turn complete";
+          body = "Check terminal for results";
+          break;
+
+
         case "permission.asked":
           title = "OpenCode: Approval needed";
           body = "Action requires your permission";

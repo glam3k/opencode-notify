@@ -1,5 +1,9 @@
 {
   "name": "opencode-notify",
+  "main": "src/index.ts",
+  "bin": {
+    "opencode-notify-test": "./src/cli.ts"
+  },
   "module": "index.ts",
   "type": "module",
   "private": true,
