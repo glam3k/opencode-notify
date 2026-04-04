@@ -11,7 +11,9 @@ export const NotifyPlugin: Plugin = async ({ $ }) => {
       let title = "";
       let body = "";
 
-      switch (event.type) {
+      const type = event.type as string;
+
+      switch (type) {
         case "session.idle": {
           title = "OpenCode: Turn complete";
           body = "Check terminal for results";
@@ -43,3 +45,5 @@ export const NotifyPlugin: Plugin = async ({ $ }) => {
     },
   };
 };
+
+export default NotifyPlugin;

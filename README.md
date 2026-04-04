@@ -1,15 +1,21 @@
-# opencode-notify
+# opencode-notify plugin
 
-To install dependencies:
+## Install dependencies
 
 ```bash
 bun install
 ```
 
-To run:
+## Build the distributable bundle
 
 ```bash
-bun run index.ts
+bun run build
 ```
 
-This project was created using `bun init` in bun v1.3.11. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+## Send a manual test notification
+
+```bash
+bun run notify "OpenCode: Test" "This is a test from opencode-notify"
+```
+
+The published package exposes the compiled files in `dist/` so the plugin can be loaded without Bun installed, while keeping build artifacts out of version control.
